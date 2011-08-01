@@ -3,7 +3,7 @@
 /** Application specific controller. */
 abstract class AppController extends Controller {
     // The layout your controllers use by default.
-    public $layout = "/views/layout";
+    public $layout = "/layout";
 
     /**
      * This function is executed before any action in the controller.
