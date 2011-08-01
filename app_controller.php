@@ -3,7 +3,7 @@
 /** Application specific controller. */
 abstract class AppController extends Controller {
     // The layout your controllers use by default.
-    public $layout = "/html/html5";
+    public $layout = "/views/layout";
 
     /**
      * This function is executed before any action in the controller.
@@ -31,4 +31,20 @@ abstract class AppController extends Controller {
      * @return void
      */
     public function afterRender($action_name, $arguments) {}
+    
+    /**
+     * Handles URL rewriting and routes to desired controllers.
+     * @param array $path_tokens Path entered in the URL.
+     * @return array $path_tokens Path to rewrite to.
+     */
+    public static function rewriteRequest($path_tokens) {
+        if($path_tokens[0]==""){
+            return array("pages","");
+        } elseif (method_exists("melt\PagesController", $path_tokens[0])){
+            array_unshift($path_tokens,"pages");
+            return $path_tokens;
+        } elseif($path_tokens[0]=="pages"){
+            return false;
+        }
+    }
 }
